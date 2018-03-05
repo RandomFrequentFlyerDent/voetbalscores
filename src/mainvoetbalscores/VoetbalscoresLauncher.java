@@ -42,20 +42,16 @@ public class VoetbalscoresLauncher {
 					wedstrijden[i].getThuisTeam().getTeamNaam(), wedstrijden[i].getUitTeam().getTeamNaam());
 			wedstrijden[i].setTegenDoelpunten(scanner.nextInt());
 
-			wedstrijden[i].setTotaalPuntenThuisTeam();
-			wedstrijden[i].setTotaalPuntenUitTeam();
+			wedstrijden[i].setTotaalPuntenTeams();
 			wedstrijden[i].setDoelpuntenTeams();
 		}
 
 		for (int i = 0; i < wedstrijden.length; i++) {
-			System.out.printf("De uitslag van de wedstrijd %s-%s: %d-%d\n", wedstrijden[i].getThuisTeam().getTeamNaam(),
-					wedstrijden[i].getUitTeam().getTeamNaam(), wedstrijden[i].getVoorDoelpunten(),
-					wedstrijden[i].getTegenDoelpunten());
+			wedstrijden[i].printUitslag();
 		}
 
 		for (int i = 0; i < teams.length; i++) {
-			System.out.printf("Het team %s heeft %d wedstrijdpunt en een doelsaldo van %d\n", teams[i].getTeamNaam(),
-					teams[i].getTotaalPunten(), teams[i].getDoelSaldo());
+			teams[i].printStatusTeam();
 		}
 
 	}

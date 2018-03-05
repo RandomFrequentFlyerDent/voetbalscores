@@ -82,37 +82,24 @@ public class Wedstrijd {
 		return aantalPunten;
 
 	}
-
-	public void setTotaalPuntenThuisTeam() {
-		int totaalPunten = this.thuisTeam.getTotaalPunten();
-		totaalPunten += this.getWedstrijdPuntenThuisTeam();
-		this.thuisTeam.setTotaalPunten(totaalPunten);
-	}
-
-	public void setTotaalPuntenUitTeam() {
-		int totaalPunten = this.uitTeam.getTotaalPunten();
-		totaalPunten += this.getWedstrijdPuntenUitTeam();
-		this.uitTeam.setTotaalPunten(totaalPunten);
+	
+	public void setTotaalPuntenTeams() {
+		int oudeThuisTotaalPunten = this.thuisTeam.getTotaalPunten();
+		int oudeUitTotaalPunten = this.uitTeam.getTotaalPunten();
+		this.thuisTeam.setTotaalPunten(oudeThuisTotaalPunten + this.getWedstrijdPuntenThuisTeam());
+		this.uitTeam.setTotaalPunten(oudeUitTotaalPunten + this.getWedstrijdPuntenUitTeam());
 	}
 
 	public void setDoelpuntenTeams() {
-		// get all current total goals
-		int thuisVoorDoelpunten = this.thuisTeam.getTotaalVoorDoelpunten();
-		int thuisTegenDoelpunten = this.thuisTeam.getTotaalTegenDoelpunten();
-		int uitVoorDoelpunten = this.uitTeam.getTotaalVoorDoelpunten();
-		int uitTegenDoelpunten = this.uitTeam.getTotaalTegenDoelpunten();
-
-		// get all total goals after this match
-		thuisVoorDoelpunten += this.voorDoelpunten;
-		thuisTegenDoelpunten += this.tegenDoelpunten;
-		uitVoorDoelpunten += this.tegenDoelpunten;
-		uitTegenDoelpunten += this.voorDoelpunten;
-
-		// update total goals in the team objects
-		this.thuisTeam.setTotaalVoorDoelpunten(thuisVoorDoelpunten);
-		this.thuisTeam.setTotaalTegenDoelpunten(thuisTegenDoelpunten);
-		this.uitTeam.setTotaalVoorDoelpunten(uitVoorDoelpunten);
-		this.uitTeam.setTotaalTegenDoelpunten(uitTegenDoelpunten);
+		int nieuweThuisVoorDoelpunten = this.voorDoelpunten + this.thuisTeam.getTotaalVoorDoelpunten();
+		int nieuweThuisTegenDoelpunten = this.tegenDoelpunten + this.thuisTeam.getTotaalTegenDoelpunten();
+		int nieuweUitVoorDoelpunten = this.tegenDoelpunten + this.uitTeam.getTotaalVoorDoelpunten();
+		int nieuweUitTegenDoelpunten = this.voorDoelpunten + this.uitTeam.getTotaalTegenDoelpunten();
+		
+		this.thuisTeam.setTotaalVoorDoelpunten(nieuweThuisVoorDoelpunten);
+		this.thuisTeam.setTotaalTegenDoelpunten(nieuweThuisTegenDoelpunten);
+		this.uitTeam.setTotaalVoorDoelpunten(nieuweUitVoorDoelpunten);
+		this.uitTeam.setTotaalTegenDoelpunten(nieuweUitTegenDoelpunten);
 
 	}
 
